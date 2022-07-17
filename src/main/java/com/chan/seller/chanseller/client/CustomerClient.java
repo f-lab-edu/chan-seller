@@ -1,0 +1,14 @@
+package com.chan.seller.chanseller.client;
+
+import com.chan.seller.chanseller.common.Message;
+import com.chan.seller.chanseller.dto.CustomerOrderRequestDto;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+@FeignClient(name = "customer", url = "http://localhost:8080")
+public interface CustomerClient {
+
+    @PostMapping
+    Message updateOrder(@RequestBody CustomerOrderRequestDto customerOrderRequestDto);
+}
