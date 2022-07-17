@@ -22,12 +22,10 @@ public class Order extends NameEntity {
     private String telephone;
 
     @Column(name = "start_date")
-    @NotEmpty
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
     @Column(name = "end_date")
-    @NotEmpty
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 

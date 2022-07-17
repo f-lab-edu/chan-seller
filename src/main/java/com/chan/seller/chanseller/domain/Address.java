@@ -21,4 +21,11 @@ public class Address {
     @NotEmpty
     private int sigunguCode;
 
+    public void setDoroAddress(String doroAddress) {
+        this.doroAddress = doroAddress;
+    }
+
+    public void setSigunguCode(int sigunguCode) {
+        this.sigunguCode = sigunguCode;
+    }
 }

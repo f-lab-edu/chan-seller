@@ -1,5 +1,6 @@
 package com.chan.seller.chanseller.dto;
 
+import com.chan.seller.chanseller.domain.Address;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ public class SellerOrderRequestDto {
     private String customerName;
 
     @NotEmpty
-    private String customerAddress;
+    private Address customerAddress;
 
     @NotEmpty
     private String customerTelephone;
