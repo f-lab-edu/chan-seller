@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "customer", url = "http://localhost:8080")
+@FeignClient(name="customer", url="${customer.ribbon.listOfServers}")
 public interface CustomerClient {
 
     @PutMapping("/customer/order")

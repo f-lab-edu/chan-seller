@@ -26,6 +26,7 @@ public class OrderService {
     public void convertDtoToOrder(SellerOrderRequestDto dto) {
         Order order = new Order();
         order.setCustomerId(dto.getCustomerId());
+        order.setCustomerOrderId(dto.getCustomerOrderId());
         order.setName(dto.getCustomerName());
         order.setTelephone(dto.getCustomerTelephone());
         order.setPlan(dto.getMenuPlan());
@@ -58,7 +59,7 @@ public class OrderService {
         }
 
         CustomerOrderRequestDto dto = new CustomerOrderRequestDto();
-        dto.setOrderId(id);
+        dto.setOrderId(order.getCustomerOrderId());
 
         if (isApply) {
             dto.setOrderStatus("RECEPTION");

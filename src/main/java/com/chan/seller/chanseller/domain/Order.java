@@ -20,6 +20,9 @@ public class Order extends NameEntity {
     @NotEmpty
     private String telephone;
 
+    @Column(name = "customer_order_id")
+    private Long customerOrderId;
+
     @Column(name = "start_date")
     @NotNull
     @Convert(converter = LocalDateConverter.class)
@@ -45,6 +48,9 @@ public class Order extends NameEntity {
     @JoinColumn(name = "menu_id")
     private Menu menu;
 
+    public void setCustomerOrderId(Long customerOrderId) {
+        this.customerOrderId = customerOrderId;
+    }
 
     public void setStatus(String status) {
         this.status = status;

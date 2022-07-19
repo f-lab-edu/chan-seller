@@ -16,6 +16,9 @@ public class SellerOrderRequestDto {
     private Long customerId;
 
     @NotEmpty
+    private Long customerOrderId;
+
+    @NotEmpty
     private String customerName;
 
     @NotEmpty

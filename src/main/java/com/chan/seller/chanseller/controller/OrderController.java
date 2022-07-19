@@ -1,15 +1,10 @@
 package com.chan.seller.chanseller.controller;
 
-import com.chan.seller.chanseller.client.CustomerClient;
 import com.chan.seller.chanseller.common.Message;
 import com.chan.seller.chanseller.common.StatusEnum;
-import com.chan.seller.chanseller.domain.Order;
-import com.chan.seller.chanseller.domain.OrderStatusEnum;
-import com.chan.seller.chanseller.dto.CustomerOrderRequestDto;
 import com.chan.seller.chanseller.dto.SellerOrderRequestDto;
 import com.chan.seller.chanseller.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
