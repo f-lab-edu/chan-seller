@@ -17,7 +17,6 @@ public class Store extends NameEntity {
     private Address address;
 
     @Column(name = "telephone", length = 12)
-    @Digits(fraction = 0, integer = 11)
     @NotEmpty
     private String telephone;
 

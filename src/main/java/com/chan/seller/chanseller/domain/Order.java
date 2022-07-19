@@ -1,11 +1,11 @@
 package com.chan.seller.chanseller.domain;
 
+import com.chan.seller.chanseller.converter.LocalDateConverter;
 import lombok.Getter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -18,20 +18,25 @@ public class Order extends NameEntity {
 
     @Column(name = "telephone", length = 12)
     @NotEmpty
-    @Digits(fraction = 0, integer = 11)
     private String telephone;
 
     @Column(name = "start_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate startDate;
 
     @Column(name = "end_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate endDate;
 
     @Column(name = "plan", length = 25)
     @NotEmpty
     private String plan;
+
+    @Column(name = "status", length = 20)
+    @NotEmpty
+    private String status;
 
     @Column(name = "customer_id")
     private Long customerId;
@@ -39,6 +44,15 @@ public class Order extends NameEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "menu_id")
     private Menu menu;
+
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
 
     public void setAddress(Address address) {
         this.address = address;
