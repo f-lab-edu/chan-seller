@@ -14,6 +14,11 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    @GetMapping
+    public String hello() {
+        return "asdf";
+    }
+
     @PostMapping
     public Message requestOrder(@RequestBody SellerOrderRequestDto sellerOrderRequestDto) {
         Message message = new Message();
