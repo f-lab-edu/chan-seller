@@ -4,7 +4,6 @@ import lombok.Getter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
@@ -19,8 +18,7 @@ public class Seller extends NameEntity{
     @NotEmpty
     private String telephone;
 
-    @OneToOne
-    @JoinColumn(name = "store_id")
+    @OneToOne(mappedBy = "seller")
     private Store store;
 
     public void setAccountId(String accountId) {

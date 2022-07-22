@@ -22,6 +22,10 @@ public class StoreService {
     public Store registerStore(StoreDto storeDto) {
         Seller seller = this.sellerRepository.findByAccountId(storeDto.getAccountId());
 
+        if (seller == null) {
+            throw new RuntimeException("판매자가 존재하지 않습니다.");
+        }
+
         Store store = new Store();
         store.setName(storeDto.getName());
         store.setTelephone(storeDto.getTelephone());
@@ -29,9 +33,7 @@ public class StoreService {
         store.setSeller(seller);
         seller.setStore(store);
 
-        this.sellerRepository.save(seller);
         this.storeRepository.save(store);
-
         return store;
     }
 }

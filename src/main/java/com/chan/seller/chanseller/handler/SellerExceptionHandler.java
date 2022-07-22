@@ -12,4 +12,9 @@ public class SellerExceptionHandler {
     public ResponseEntity<String> handleMethodArgumentNodValidException(MethodArgumentNotValidException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
 }

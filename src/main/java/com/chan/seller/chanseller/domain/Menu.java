@@ -40,6 +40,7 @@ public class Menu extends NameEntity {
     }
 
     public void addOrder(Order order) {
+        order.setMenu(this);
         this.orders.add(order);
     }
 

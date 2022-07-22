@@ -20,7 +20,8 @@ public class Store extends NameEntity {
     @NotEmpty
     private String telephone;
 
-    @OneToOne(mappedBy = "store")
+    @OneToOne
+    @JoinColumn(name = "seller_id")
     private Seller seller;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
@@ -40,6 +41,7 @@ public class Store extends NameEntity {
     }
 
     public void addMenu(Menu menu) {
+        menu.setStore(this);
         this.menus.add(menu);
     }
 }

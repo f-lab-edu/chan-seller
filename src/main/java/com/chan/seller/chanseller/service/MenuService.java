@@ -21,6 +21,11 @@ public class MenuService {
     @Transactional
     public Menu registerMenu(MenuDto menuDto) {
         Store store = this.storeRepository.findById(menuDto.getStoreId());
+
+        if (store == null) {
+            throw new RuntimeException("가게가 존재하지 않습니다.");
+        }
+
         Menu menu = new Menu();
         menu.setName(menuDto.getName());
         menu.setDescription(menuDto.getDescription());
@@ -28,9 +33,7 @@ public class MenuService {
         menu.setStore(store);
         store.addMenu(menu);
 
-        this.storeRepository.save(store);
         this.menuRepository.save(menu);
-
         return menu;
     }
 }

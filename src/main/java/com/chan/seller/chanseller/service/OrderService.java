@@ -29,6 +29,11 @@ public class OrderService {
     @Transactional
     public Order convertDtoToOrder(SellerOrderRequestDto dto) {
         Menu menu = this.menuRepository.findById(dto.getMenuId());
+
+        if (menu == null) {
+            throw new RuntimeException("주문이 존재하지 않습니다.");
+        }
+
         Order order = new Order();
         order.setCustomerId(dto.getCustomerId());
         order.setCustomerOrderId(dto.getCustomerOrderId());
@@ -48,7 +53,6 @@ public class OrderService {
         menu.addOrder(order);
 
         this.orderRepository.save(order);
-        this.menuRepository.save(menu);
         return order;
     }
 
@@ -58,13 +62,11 @@ public class OrderService {
         Order order = this.orderRepository.findById(id);
 
         if (order == null) {
-            message.setMessage("주문이 존재하지 않습니다.");
-            return message;
+            throw new RuntimeException("주문이 존재하지 않습니다.");
         }
 
         if (!order.getStatus().equals("ORDER")) {
-            message.setMessage("이미 수락, 취소된 주문입니다.");
-            return message;
+            throw new RuntimeException("이미 수락, 취소된 주문입니다.");
         }
 
         CustomerOrderRequestDto dto = new CustomerOrderRequestDto();
