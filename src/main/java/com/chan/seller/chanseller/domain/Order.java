@@ -44,7 +44,7 @@ public class Order extends NameEntity {
     @Column(name = "customer_id")
     private Long customerId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
     private Menu menu;
 

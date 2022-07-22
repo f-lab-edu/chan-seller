@@ -3,9 +3,11 @@ package com.chan.seller.chanseller.service;
 import com.chan.seller.chanseller.client.CustomerClient;
 import com.chan.seller.chanseller.common.Message;
 import com.chan.seller.chanseller.domain.Address;
+import com.chan.seller.chanseller.domain.Menu;
 import com.chan.seller.chanseller.domain.Order;
 import com.chan.seller.chanseller.dto.CustomerOrderRequestDto;
 import com.chan.seller.chanseller.dto.SellerOrderRequestDto;
+import com.chan.seller.chanseller.repository.MenuRepository;
 import com.chan.seller.chanseller.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,8 +24,11 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
+    private final MenuRepository menuRepository;
+
     @Transactional
-    public void convertDtoToOrder(SellerOrderRequestDto dto) {
+    public Order convertDtoToOrder(SellerOrderRequestDto dto) {
+        Menu menu = this.menuRepository.findById(dto.getMenuId());
         Order order = new Order();
         order.setCustomerId(dto.getCustomerId());
         order.setCustomerOrderId(dto.getCustomerOrderId());
@@ -39,8 +44,12 @@ public class OrderService {
         address.setDoroAddress(dto.getCustomerDoroAddress());
         address.setSigunguCode(dto.getCustomerSigunguCode());
         order.setAddress(address);
+        order.setMenu(menu);
+        menu.addOrder(order);
 
         this.orderRepository.save(order);
+        this.menuRepository.save(menu);
+        return order;
     }
 
     @Transactional
@@ -69,8 +78,8 @@ public class OrderService {
             order.setStatus("CANCEL");
         }
 
-        message = customerClient.updateOrder(dto);
         this.orderRepository.save(order);
+        message = customerClient.updateOrder(dto);
         return message;
     }
 }

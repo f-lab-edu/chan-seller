@@ -23,7 +23,7 @@ public class Menu extends NameEntity {
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
 
@@ -33,6 +33,14 @@ public class Menu extends NameEntity {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public void addOrder(Order order) {
+        this.orders.add(order);
     }
 
 }

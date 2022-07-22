@@ -20,6 +20,9 @@ public class Store extends NameEntity {
     @NotEmpty
     private String telephone;
 
+    @OneToOne(mappedBy = "store")
+    private Seller seller;
+
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<Menu> menus = new ArrayList<>();
 
@@ -32,4 +35,11 @@ public class Store extends NameEntity {
         this.telephone = telephone;
     }
 
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
+    public void addMenu(Menu menu) {
+        this.menus.add(menu);
+    }
 }

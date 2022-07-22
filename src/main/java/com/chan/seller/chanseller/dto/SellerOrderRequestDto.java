@@ -12,30 +12,30 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @Setter
 public class SellerOrderRequestDto {
-    @NotEmpty
+    @NotEmpty(message = "customerId가 필요합니다.")
     private Long customerId;
 
-    @NotEmpty
+    @NotEmpty(message = "customerOrderId가 필요합니다.")
     private Long customerOrderId;
 
-    @NotEmpty
+    @NotEmpty(message = "customerName가 필요합니다.")
     private String customerName;
 
-    @NotEmpty
+    @NotEmpty(message = "customerDoroAddress가 필요합니다.")
     private String customerDoroAddress;
 
-    @NotEmpty
+    @NotEmpty(message = "customerSigunguCode가 필요합니다.")
     private int customerSigunguCode;
 
-    @NotEmpty
+    @NotEmpty(message = "customerTelephone가 필요합니다.")
     private String customerTelephone;
 
-    @NotEmpty
+    @NotEmpty(message = "menuId가 필요합니다.")
     private Long menuId;
 
-    @NotEmpty
+    @NotEmpty(message = "menuPlan가 필요합니다.")
     private String menuPlan;
 
-    @NotEmpty
+    @NotEmpty(message = "menuCount가 필요합니다.")
     private int menuCount;
 }
