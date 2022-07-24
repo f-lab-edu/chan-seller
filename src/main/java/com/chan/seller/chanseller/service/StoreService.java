@@ -23,7 +23,7 @@ public class StoreService {
         Seller seller = this.sellerRepository.findByAccountId(storeDto.getAccountId());
 
         if (seller == null) {
-            throw new RuntimeException("판매자가 존재하지 않습니다.");
+            throw new RuntimeException();
         }
 
         Store store = new Store();

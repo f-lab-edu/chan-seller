@@ -2,6 +2,7 @@ package com.chan.seller.chanseller.service;
 
 import com.chan.seller.chanseller.client.CustomerClient;
 import com.chan.seller.chanseller.common.Message;
+import com.chan.seller.chanseller.common.StatusEnum;
 import com.chan.seller.chanseller.domain.Address;
 import com.chan.seller.chanseller.domain.Menu;
 import com.chan.seller.chanseller.domain.Order;
@@ -31,7 +32,7 @@ public class OrderService {
         Menu menu = this.menuRepository.findById(dto.getMenuId());
 
         if (menu == null) {
-            throw new RuntimeException("주문이 존재하지 않습니다.");
+            throw new RuntimeException();
         }
 
         Order order = new Order();
@@ -62,11 +63,11 @@ public class OrderService {
         Order order = this.orderRepository.findById(id);
 
         if (order == null) {
-            throw new RuntimeException("주문이 존재하지 않습니다.");
+            throw new RuntimeException();
         }
 
         if (!order.getStatus().equals("ORDER")) {
-            throw new RuntimeException("이미 수락, 취소된 주문입니다.");
+            throw new RuntimeException();
         }
 
         CustomerOrderRequestDto dto = new CustomerOrderRequestDto();
@@ -82,6 +83,10 @@ public class OrderService {
 
         this.orderRepository.save(order);
         message = customerClient.updateOrder(dto);
+
+        if(message.getStatus().equals(StatusEnum.BAD_REQUEST)) {
+            throw new RuntimeException();
+        }
         return message;
     }
 }

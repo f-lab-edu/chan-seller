@@ -1,6 +1,5 @@
 package com.chan.seller.chanseller.domain;
 
-import com.chan.seller.chanseller.converter.LocalDateConverter;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -25,12 +24,10 @@ public class Order extends NameEntity {
 
     @Column(name = "start_date")
     @NotNull
-    @Convert(converter = LocalDateConverter.class)
     private LocalDate startDate;
 
     @Column(name = "end_date")
     @NotNull
-    @Convert(converter = LocalDateConverter.class)
     private LocalDate endDate;
 
     @Column(name = "plan", length = 25)

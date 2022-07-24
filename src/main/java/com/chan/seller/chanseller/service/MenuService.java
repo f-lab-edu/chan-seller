@@ -23,7 +23,7 @@ public class MenuService {
         Store store = this.storeRepository.findById(menuDto.getStoreId());
 
         if (store == null) {
-            throw new RuntimeException("가게가 존재하지 않습니다.");
+            throw new RuntimeException();
         }
 
         Menu menu = new Menu();
