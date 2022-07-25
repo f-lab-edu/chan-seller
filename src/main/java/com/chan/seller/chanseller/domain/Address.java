@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Embeddable
 @NoArgsConstructor @AllArgsConstructor
@@ -18,7 +19,7 @@ public class Address {
     private String doroAddress;
 
     @Column(name = "sigungu_code")
-    @NotEmpty
+    @NotNull
     private int sigunguCode;
 
     public void setDoroAddress(String doroAddress) {
