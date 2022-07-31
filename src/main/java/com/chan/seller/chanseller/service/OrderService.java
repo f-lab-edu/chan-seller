@@ -6,6 +6,7 @@ import com.chan.seller.chanseller.common.StatusEnum;
 import com.chan.seller.chanseller.domain.Address;
 import com.chan.seller.chanseller.domain.Menu;
 import com.chan.seller.chanseller.domain.Order;
+import com.chan.seller.chanseller.domain.OrderStatus;
 import com.chan.seller.chanseller.dto.CustomerOrderRequestDto;
 import com.chan.seller.chanseller.dto.SellerOrderRequestDto;
 import com.chan.seller.chanseller.repository.MenuRepository;
@@ -41,7 +42,7 @@ public class OrderService {
         order.setName(dto.getCustomerName());
         order.setTelephone(dto.getCustomerTelephone());
         order.setPlan(dto.getMenuPlan());
-        order.setStatus("ORDER");
+        order.setOrderStatus(OrderStatus.ORDER);
 
         order.setStartDate(LocalDate.now());
         order.setEndDate(LocalDate.now());
@@ -66,7 +67,7 @@ public class OrderService {
             throw new RuntimeException();
         }
 
-        if (!order.getStatus().equals("ORDER")) {
+        if (!order.getOrderStatus().equals(OrderStatus.ORDER)) {
             throw new RuntimeException();
         }
 
@@ -75,10 +76,10 @@ public class OrderService {
 
         if (isApply) {
             dto.setOrderStatus("RECEPTION");
-            order.setStatus("RECEPTION");
+            order.setOrderStatus(OrderStatus.RECEPTION);
         } else {
             dto.setOrderStatus("CANCEL");
-            order.setStatus("CANCEL");
+            order.setOrderStatus(OrderStatus.CANCEL);
         }
 
         this.orderRepository.save(order);

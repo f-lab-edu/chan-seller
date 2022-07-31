@@ -1,6 +1,6 @@
 package com.chan.seller.chanseller.domain;
 
-public enum OrderStatusEnum {
+public enum OrderStatus {
     ORDER,
     RECEPTION,
     CANCEL

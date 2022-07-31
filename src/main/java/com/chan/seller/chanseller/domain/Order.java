@@ -34,9 +34,8 @@ public class Order extends NameEntity {
     @NotEmpty
     private String plan;
 
-    @Column(name = "status", length = 20)
-    @NotEmpty
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @Column(name = "customer_id")
     private Long customerId;
@@ -49,8 +48,8 @@ public class Order extends NameEntity {
         this.customerOrderId = customerOrderId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public void setMenu(Menu menu) {
