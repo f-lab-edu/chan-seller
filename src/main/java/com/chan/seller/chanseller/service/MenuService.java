@@ -20,6 +20,7 @@ public class MenuService {
 
     @Transactional
     public Menu registerMenu(MenuDto menuDto) {
+
         Store store = this.storeRepository.findById(menuDto.getStoreId());
 
         if (store == null) {
@@ -31,9 +32,7 @@ public class MenuService {
         menu.setDescription(menuDto.getDescription());
         menu.setPrice(menuDto.getPrice());
         menu.setStore(store);
-        store.addMenu(menu);
 
-        this.menuRepository.save(menu);
-        return menu;
+        return this.menuRepository.save(menu);
     }
 }

@@ -13,4 +13,8 @@ public class Message {
         this.message = null;
         this.data = null;
     }
+
+    public boolean isOk(){
+        return status.equals(StatusEnum.OK);
+    }
 }

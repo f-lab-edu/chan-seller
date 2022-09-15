@@ -1,11 +1,13 @@
 package com.chan.seller.chanseller.domain;
 
+import com.chan.seller.chanseller.dto.SellerOrderRequestDto;
 import lombok.Getter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -15,7 +17,7 @@ public class Order extends NameEntity {
     @Embedded
     private Address address;
 
-    @Column(name = "telephone", length = 12)
+    @Column(name = "telephone", length = 13)
     @NotEmpty
     private String telephone;
 
@@ -43,6 +45,32 @@ public class Order extends NameEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
     private Menu menu;
+
+    public static Order request(SellerOrderRequestDto dto, Menu menu){
+        Order order = new Order();
+
+        order.setCustomerId(dto.getCustomerId());
+        order.setCustomerOrderId(dto.getCustomerOrderId());
+        order.setName(dto.getCustomerName());
+        order.setTelephone(dto.getCustomerTelephone());
+        order.setPlan(dto.getMenuPlan());
+        order.setOrderStatus(OrderStatus.ORDER);
+
+        order.setStartDate(LocalDate.now());
+        order.setEndDate(LocalDate.now());
+
+        //주소 설정
+        Address address = new Address();
+        address.setDoroAddress(dto.getCustomerDoroAddress());
+        address.setSigunguCode(dto.getCustomerSigunguCode());
+
+        order.setAddress(address);
+
+        //메뉴 설정
+        menu.addOrder(order);
+
+        return order;
+    }
 
     public void setCustomerOrderId(Long customerOrderId) {
         this.customerOrderId = customerOrderId;

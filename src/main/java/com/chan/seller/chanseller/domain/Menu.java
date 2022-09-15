@@ -17,7 +17,6 @@ public class Menu extends NameEntity {
     private String description;
 
     @Column(name = "price")
-    @NotEmpty
     private int price;
 
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)

@@ -1,5 +1,6 @@
 package com.chan.seller.chanseller.dto;
 
+import com.chan.seller.chanseller.domain.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,5 @@ public class CustomerOrderRequestDto {
     private Long orderId;
 
     @NotEmpty
-    private String orderStatus;
+    private OrderStatus orderStatus;
 }

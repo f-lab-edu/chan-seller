@@ -31,6 +31,7 @@ public class StoreService {
         store.setTelephone(storeDto.getTelephone());
         store.setAddress(storeDto.getAddress());
         store.setSeller(seller);
+
         seller.setStore(store);
 
         this.storeRepository.save(store);

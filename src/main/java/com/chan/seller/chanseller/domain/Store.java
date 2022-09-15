@@ -16,7 +16,7 @@ public class Store extends NameEntity {
     @Embedded
     private Address address;
 
-    @Column(name = "telephone", length = 12)
+    @Column(name = "telephone", length = 13)
     @NotEmpty
     private String telephone;
 
@@ -41,7 +41,9 @@ public class Store extends NameEntity {
     }
 
     public void addMenu(Menu menu) {
+
         menu.setStore(this);
         this.menus.add(menu);
+
     }
 }

@@ -21,15 +21,11 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<Message> requestOrder(@Valid @RequestBody SellerOrderRequestDto sellerOrderRequestDto) {
         Message message = new Message();
-        Order order = orderService.convertDtoToOrder(sellerOrderRequestDto);
 
-        if (order == null) {
-            message.setStatus(StatusEnum.BAD_REQUEST);
-            message.setMessage("FAIL");
-        } else {
-            message.setStatus(StatusEnum.OK);
-            message.setMessage("OK");
-        }
+        Order order = orderService.requestOrder(sellerOrderRequestDto);
+
+        message.setStatus(StatusEnum.OK);
+        message.setMessage("주문 요청 성공");
         message.setData(order);
 
         return ResponseEntity.ok().body(message);
@@ -37,13 +33,25 @@ public class OrderController {
 
     @PostMapping("/apply")
     public ResponseEntity<Message> applyOrder(@RequestParam(name = "orderId", defaultValue = "0") Long id) {
-        Message message = orderService.ProcessOrder(id, true);
+        Message message = new Message();
+
+        orderService.ProcessOrder(id, true);
+
+        message.setStatus(StatusEnum.OK);
+        message.setMessage("주문 승인 성공");
+
         return ResponseEntity.ok().body(message);
     }
 
     @PostMapping("/cancel")
     public ResponseEntity<Message> cancelOrder(@RequestParam(name = "orderId", defaultValue = "0") Long id) {
-        Message message = orderService.ProcessOrder(id, false);
+        Message message = new Message();
+
+        orderService.ProcessOrder(id, false);
+
+        message.setStatus(StatusEnum.OK);
+        message.setMessage("주문 취소 성공");
+
         return ResponseEntity.ok().body(message);
     }
 }
